@@ -27,6 +27,7 @@ interface TableProps {
   data: DataType[];
   page: number;
   totalRegisters: number;
+  perPage: number;
   onPageChange: (page: number) => void;
   colorScheme?: ThemeTypings["colorSchemes"];
   emptyData?: EmptyMessage;
@@ -38,11 +39,14 @@ export function Table({
   totalRegisters,
   data,
   columns,
+  perPage,
   colorScheme = "teal",
   emptyData,
 }: TableProps) {
+  const registersPerPage = perPage??10;
   const pagination = usePagination({
     totalRegisters,
+    registersPerPage,
     page,
     items: data,
   });
